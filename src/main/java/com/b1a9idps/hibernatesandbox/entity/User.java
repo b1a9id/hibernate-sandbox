@@ -38,6 +38,15 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    User(Long id, String name, Gender gender, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+    }
+
+    private User() {}
+
     public Long getId() {
         return id;
     }
