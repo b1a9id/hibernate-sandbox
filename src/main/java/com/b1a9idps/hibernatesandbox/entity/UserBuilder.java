@@ -3,7 +3,6 @@ package com.b1a9idps.hibernatesandbox.entity;
 import com.b1a9idps.hibernatesandbox.enums.Gender;
 
 public class UserBuilder {
-    private Long id;
     private String name;
     private Gender gender;
     private Integer age;
@@ -12,11 +11,6 @@ public class UserBuilder {
 
     public static UserBuilder builder() {
         return new UserBuilder();
-    }
-
-    public UserBuilder withId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public UserBuilder withName(String name) {
@@ -35,6 +29,6 @@ public class UserBuilder {
     }
 
     public User build() {
-        return new User(id, name, gender, age);
+        return new User(name, gender, age);
     }
 }

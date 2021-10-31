@@ -38,8 +38,7 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    User(Long id, String name, Gender gender, Integer age) {
-        this.id = id;
+    User(String name, Gender gender, Integer age) {
         this.name = name;
         this.gender = gender;
         this.age = age;
