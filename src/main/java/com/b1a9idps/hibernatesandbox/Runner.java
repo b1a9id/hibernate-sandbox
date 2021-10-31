@@ -1,4 +1,4 @@
-package com.b1a9idps;
+package com.b1a9idps.hibernatesandbox;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
