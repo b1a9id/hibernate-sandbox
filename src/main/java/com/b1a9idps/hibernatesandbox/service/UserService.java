@@ -9,5 +9,7 @@ public interface UserService {
 
     UserDto create(UserCreateDto createDto);
 
+    List<UserDto> bulkCreate(List<UserCreateDto> userCreateDtoList);
+
     List<UserDto> list();
 }

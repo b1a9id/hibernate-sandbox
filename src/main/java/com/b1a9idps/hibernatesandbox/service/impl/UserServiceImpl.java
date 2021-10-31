@@ -1,9 +1,11 @@
 package com.b1a9idps.hibernatesandbox.service.impl;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.b1a9idps.hibernatesandbox.dto.UserCreateDto;
 import com.b1a9idps.hibernatesandbox.dto.UserDto;
@@ -17,18 +19,33 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private static final Function<UserCreateDto, User> CREATE_DTO_USER_FUNCTION =
+            createDto -> UserBuilder.builder()
+                    .withName(createDto.name())
+                    .withGender(createDto.gender())
+                    .withAge(createDto.age())
+                    .build();
+
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
+    @Transactional
     public UserDto create(UserCreateDto createDto) {
-        User user = UserBuilder.builder()
-                .withName(createDto.name())
-                .withGender(createDto.gender())
-                .withAge(createDto.age())
-                .build();
+        var user = CREATE_DTO_USER_FUNCTION.apply(createDto);
         return UserDto.from(userRepository.save(user));
+    }
+
+    @Override
+    @Transactional
+    public List<UserDto> bulkCreate(List<UserCreateDto> userCreateDtoList) {
+        var users = userCreateDtoList.stream()
+                .map(CREATE_DTO_USER_FUNCTION)
+                .collect(Collectors.toList());
+        return userRepository.saveAll(users).stream()
+                .map(UserDto::from)
+                .collect(Collectors.toList());
     }
 
     @Override
