@@ -1,1 +1,7 @@
-
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:33306/hibernate_sandbox
+    username: root
+    password: root
+  jpa:
+    show-sql: true
