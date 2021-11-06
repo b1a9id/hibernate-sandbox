@@ -20,7 +20,7 @@ public record Runner(UserService userService) implements ApplicationRunner {
         var gender = Gender.MAN;
         var age = 20;
 
-        var userCreateDtoList = IntStream.rangeClosed(0, 50)
+        var userCreateDtoList = IntStream.rangeClosed(0, 70)
                         .mapToObj(i -> new UserCreateDto(name + i, gender, age + i))
                                 .collect(Collectors.toList());
         userService.bulkCreate(userCreateDtoList);
