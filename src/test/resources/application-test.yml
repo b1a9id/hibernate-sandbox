@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:tc:mysql:8.0://hostname:port/test?TC_MY_CNF=db/mysql_conf_override
+    username: test
+    password:
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+
