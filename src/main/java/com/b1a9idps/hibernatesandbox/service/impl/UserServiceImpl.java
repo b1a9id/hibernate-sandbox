@@ -38,17 +38,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
-    public List<UserDto> bulkCreate(List<UserCreateDto> userCreateDtoList) {
-        var users = userCreateDtoList.stream()
-                .map(CREATE_DTO_USER_FUNCTION)
-                .collect(Collectors.toList());
-        return userRepository.saveAll(users).stream()
-                .map(UserDto::from)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<UserDto> list() {
         return userRepository.findAll().stream()
                 .map(UserDto::from)
